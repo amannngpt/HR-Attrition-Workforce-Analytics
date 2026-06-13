@@ -25,6 +25,7 @@
 ## Table of Contents
 
 - [Project Overview](#project-overview)
+- [Tools Used](#tools-used)
 - [Business Context & Problem Statement](#business-context--problem-statement)
 - [Key Findings](#key-findings)
 - [Dashboard Walkthrough](#dashboard-walkthrough)
@@ -33,7 +34,9 @@
 - [DAX Measures](#dax-measures)
 - [Assumptions & Limitations](#assumptions--limitations)
 - [Strategic Recommendations](#strategic-recommendations)
+- [How To Reproduce](#how-to-reproduce)
 - [Repository Structure](#repository-structure)
+- [Methodology Notes](#methodology-notes)
 - [Key Learnings](#key-learnings)
 - [Contact](#contact)
 
