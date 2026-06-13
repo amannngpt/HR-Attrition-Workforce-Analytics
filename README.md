@@ -593,6 +593,3 @@ PostgreSQL performs integer division by default — `237 / 1470` returns `0`, no
 ---
 
 *Dataset: IBM HR Analytics Employee Attrition & Performance via Kaggle. Synthetic dataset generated for demonstration purposes. All monetary values in USD.*
-
-
-rposes.*
