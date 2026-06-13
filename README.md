@@ -58,7 +58,7 @@ The analysis demonstrates cross-tool validation methodology: every finding produ
 
 | Tool | Version | Purpose |
 |---|---|---|
-| Microsoft Excel | Office 365 | Data cleaning, pivot table analysis, CHOOSE/IF formulas |
+| Microsoft Excel | Office 2021 | Data cleaning, pivot table analysis, CHOOSE/IF formulas |
 | PostgreSQL | 18 | Relational database, SQL analysis, compound risk profiling |
 | Power BI Desktop | Latest | Interactive dashboard, DAX measures, Power Query transformations |
 | DAX | — | 12 custom measures across 4 display folders |
