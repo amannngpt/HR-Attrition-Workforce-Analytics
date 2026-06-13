@@ -44,7 +44,7 @@
 
 ## Project Overview
 
-This project delivers an end-to-end HR attrition analysis for a mid-size technology company experiencing significant employee turnover. Acting as a Data Analyst engaged by the Chief People Officer, the analysis moves from raw data through structured cleaning, multi-tool analysis, and a four-page interactive Power BI dashboard — culminating in a $13.61M annual cost quantification and actionable retention recommendations.
+This project delivers an end-to-end HR attrition analysis for a mid-size technology company experiencing significant employee turnover. Acting as a Data Analyst engaged by the Chief People Officer, the analysis moves from raw data through structured cleaning, multi-tool analysis, and a five-page interactive Power BI dashboard — culminating in a $13.61M annual cost quantification and actionable retention recommendations.
 
 The analysis demonstrates cross-tool validation methodology: every finding produced in Excel pivot tables was independently verified in PostgreSQL SQL queries, ensuring analytical integrity across the full project.
 
