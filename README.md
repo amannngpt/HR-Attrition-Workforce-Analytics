@@ -1,6 +1,43 @@
 # HR Employee Attrition & Workforce Analytics
 
+![Excel](https://img.shields.io/badge/Excel-Data%20Cleaning%20%26%20Analysis-217346?style=flat&logo=microsoft-excel&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL%2018-SQL%20Analysis-336791?style=flat&logo=postgresql&logoColor=white)
+![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-F2C811?style=flat&logo=powerbi&logoColor=black)
+![DAX](https://img.shields.io/badge/DAX-12%20Measures-F2C811?style=flat&logo=powerbi&logoColor=black)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat)
+
+---
+
 ![Dashboard Preview](5_Screenshots/PBI_Dashboard/PBI_P1_Attrition_Overview.png)
+
+## Quick Stats
+
+| | |
+|---|---|
+| **Dataset** | IBM HR Analytics — 1,470 employees, 35 columns |
+| **Tools** | Excel · PostgreSQL 18 · Power BI · DAX · Power Query |
+| **Analysis** | 5 pivot tables · 20 SQL queries · 5 dashboard pages · 12 DAX measures |
+| **Headline Finding** | $13.61M annual attrition cost · 57.1% compound risk profile |
+| **Key Technique** | Cross-tool validation — all Excel findings verified in SQL |
+
+---
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Business Context & Problem Statement](#business-context--problem-statement)
+- [Key Findings](#key-findings)
+- [Dashboard Walkthrough](#dashboard-walkthrough)
+- [Data Cleaning Process](#data-cleaning-process)
+- [SQL Analysis](#sql-analysis)
+- [DAX Measures](#dax-measures)
+- [Assumptions & Limitations](#assumptions--limitations)
+- [Strategic Recommendations](#strategic-recommendations)
+- [Repository Structure](#repository-structure)
+- [Key Learnings](#key-learnings)
+- [Contact](#contact)
+
+---
 
 ## Project Overview
 
@@ -11,6 +48,19 @@ The analysis demonstrates cross-tool validation methodology: every finding produ
 **Tools Used:** Microsoft Excel · PostgreSQL 18 · Power BI Desktop · DAX · Power Query
 
 **Dataset:** [IBM HR Analytics Employee Attrition & Performance](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset) — Kaggle · 1,470 rows · 35 columns
+
+---
+
+## Tools & Technologies
+
+| Tool | Version | Purpose |
+|---|---|---|
+| Microsoft Excel | Office 365 | Data cleaning, pivot table analysis, CHOOSE/IF formulas |
+| PostgreSQL | 18 | Relational database, SQL analysis, compound risk profiling |
+| Power BI Desktop | Latest | Interactive dashboard, DAX measures, Power Query transformations |
+| DAX | — | 12 custom measures across 4 display folders |
+| Power Query | — | Custom grouping columns, sort columns, calculated columns |
+| GitHub | — | Version control, portfolio hosting |
 
 ---
 
@@ -412,4 +462,127 @@ Employees with no stock options leave at 24.4% versus 9.4% for Low option holder
 
 ---
 
+## How to Reproduce This Analysis
+
+### Excel Analysis
+1. Open `2_Excel_Analysis/HR_Attrition_Cleaned.xlsx`
+2. Navigate to sheets PT1 through PT5 for pivot table analysis
+3. Raw data preserved in `Raw_Data` sheet — `Cleaned_Data` sheet contains all transformations
+
+### SQL Analysis
+1. Install PostgreSQL 18 and pgAdmin
+2. Create a database named `hr_attrition`
+3. Run `3_SQL/Queries/HR_Attrition_SQL_Analysis.sql` — execute Q00 first to create the table
+4. Import `1_Data/Cleaned/HR_Attrition_Cleaned.csv` using pgAdmin Import/Export tool
+5. Run Q01–Q20 individually by highlighting each query and pressing F5
+6. Expected outputs available in `3_SQL/Query_Results/` for validation
+
+### Power BI Dashboard
+1. Open `4_PowerBI/Hr_Attrition.pbix` in Power BI Desktop
+2. If data source path error appears: Transform Data → Data Source Settings → update path to your local `HR_Attrition_Cleaned.xlsx` location
+3. All 12 DAX measures are in the `HR Measures` table organized by display folder
+
+---
+
 ## Repository Structure
+HR-Attrition-Workforce-Analytics/
+
+│
+
+├── 1_Data/
+
+│   ├── Raw/
+
+│   │   └── WA_Fn-UseC_-HR-Employee-Attrition.csv
+
+│   └── Cleaned/
+
+│       ├── HR_Attrition_Cleaned.xlsx
+
+│       └── HR_Attrition_Cleaned.csv
+
+│
+
+├── 2_Excel_Analysis/
+
+│   └── HR_Attrition_Cleaned.xlsx
+
+│
+
+├── 3_SQL/
+│   ├── Queries/
+
+│   │   └── HR_Attrition_SQL_Analysis.sql
+
+│   └── Query_Results/
+
+│       └── Q01–Q20 CSV files (20 files)
+
+│
+
+├── 4_PowerBI/
+
+│   └── Hr_Attrition.pbix
+
+│
+
+├── 5_Screenshots/
+
+│   ├── DC_Data_Cleaning/
+
+│   ├── Excel_Analysis/
+
+│   ├── SQL_Queries/
+
+│   └── PBI_Dashboard/
+
+│
+
+└── README.md
+
+---
+
+## Methodology Notes
+
+### Why Cross-Tool Validation?
+Every Excel pivot table finding was independently reproduced in PostgreSQL SQL. This cross-validation approach serves two purposes: it builds confidence in findings by confirming consistency across different calculation engines, and it demonstrates proficiency in multiple tools on the same analytical problem. Zero discrepancies were found across all 20 validated queries.
+
+### Why Binary Flags Over Text Columns?
+The `Attrition` and `OverTime` columns were stored as Yes/No text. Text cannot be averaged or summed in pivot tables or DAX without calculated fields — which have known aggregation errors for percentage calculations. Binary flags (Attrition_Flag: 1/0, OverTime_Flag: 1/0) enable clean rate calculations: `Rate = SUM(Flag) / COUNT(Flag)`. This approach was used consistently across Excel, SQL, and DAX.
+
+### Why Adjacent Formula Columns Instead of Calculated Fields?
+Excel Calculated Fields in pivot tables operate on row-level data before aggregation, not on the aggregated values. This produces incorrect results for percentage subtraction (e.g., Delta vs Benchmark). Adjacent cell formula columns referencing the already-aggregated pivot values are always correct. This is a common error in portfolio projects — documenting the correct approach demonstrates deeper analytical maturity.
+
+### Why SUMX for Cost Calculations?
+`SUMX(FILTER(...), MonthlyIncome * 12)` calculates each individual leaver's annual salary before summing. The alternative `COUNT × AVG × 12` introduces rounding errors when the average produces a non-integer value — small per employee but meaningful at scale across 237 leavers. Individual-level iteration via SUMX mirrors the SQL `SUM(monthlyincome) * 12` approach used in Q17 and Q18.
+
+---
+
+---
+
+## Key Learnings
+
+**Cross-tool validation builds confidence** — Validating every Excel finding in SQL and finding zero discrepancies confirmed analytical integrity and demonstrated that both tools were being used correctly. Consistency across tools is a portfolio strength.
+
+**Compound segmentation reveals what single-variable analysis misses** — The 57.1% compound risk profile (Q19) was the most powerful finding in the project and could not have been efficiently produced by Excel pivot tables alone. SQL compound filtering unlocked insights invisible to standard BI analysis.
+
+**Calculated Fields in Excel pivot tables are unreliable for rate calculations** — They operate on row-level data before aggregation, producing incorrect percentage subtraction results. Adjacent cell formula columns referencing aggregated pivot values are the correct approach — a lesson that applies to all pivot-based rate analysis.
+
+**Volume drives cost more than rate** — R&D costs more than Sales in total attrition cost despite a 6.8pp lower attrition rate, because it loses 41 more employees annually. Rate-only analysis is insufficient for financial risk prioritization.
+
+**Not all satisfaction variables predict equally** — Relationship satisfaction (5.9pp spread) is a far weaker attrition predictor than job involvement (24.7pp spread). Resource-constrained HR teams should prioritize engagement programs over team-building activities based on this evidence.
+
+**Anomalies are findings, not errors** — The WLB "Best" group showing higher attrition than "Better," the Upper-Mid income inversion, and the 3-session training spike were all documented as analytical findings rather than dismissed. Every anomaly has a plausible business explanation that strengthens the narrative.
+
+---
+
+## Contact
+
+**Aman Lall** — Data Analyst Portfolio  
+[GitHub Profile](https://github.com/amannngpt) 
+[LinkedIn](https://www.linked.com/in/amanlall94/)
+[P1: Superstore Sales Analysis](https://github.com/amannngpt/Superstore-Sales-Analysis)
+
+---
+
+*Dataset: IBM HR Analytics Employee Attrition & Performance via Kaggle. Synthetic dataset generated for demonstration purposes.*
