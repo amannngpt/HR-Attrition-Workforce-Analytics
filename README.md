@@ -583,7 +583,7 @@ Excel Calculated Fields in pivot tables operate on row-level data before aggrega
 
 **Aman Lall** — Data Analyst Portfolio  
 [GitHub Profile](https://github.com/amannngpt) 
-[LinkedIn](https://www.linked.com/in/amanlall94/)
+[LinkedIn](https://www.linkedin.com/in/amanlall94/)
 [P1: Superstore Sales Analysis](https://github.com/amannngpt/Superstore-Sales-Analysis)
 
 ---
