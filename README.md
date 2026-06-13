@@ -54,7 +54,7 @@ The analysis demonstrates cross-tool validation methodology: every finding produ
 
 ---
 
-## 🛠️ Tools & Technologies
+## 🔧 Tools & Technologies
 
 | Tool | Version | Purpose |
 |---|---|---|
@@ -320,7 +320,7 @@ Eight additional columns created in Power BI Power Query for extended analysis a
 
 ---
 
-## 🗄️ SQL Analysis
+## 💾 SQL Analysis
 
 **Database:** PostgreSQL 18  
 **File:** `SQL/Queries/HR_Attrition_SQL_Analysis.sql`  
@@ -457,7 +457,7 @@ SWITCH(
 
 ---
 
-## ⚠️ Assumptions & Limitations
+## 🚨 Assumptions & Limitations
 
 ### Cost Model Assumptions
 
