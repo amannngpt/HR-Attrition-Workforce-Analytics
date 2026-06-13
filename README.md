@@ -554,8 +554,7 @@ Every Excel pivot table finding was independently reproduced in PostgreSQL SQL. 
 The `Attrition` and `OverTime` columns were stored as Yes/No text. Text cannot be averaged or summed in pivot tables or DAX without calculated fields — which have known aggregation errors for percentage calculations. Binary flags (Attrition_Flag: 1/0, OverTime_Flag: 1/0) enable clean rate calculations: `Rate = SUM(Flag) / COUNT(Flag)`. This approach was used consistently across Excel, SQL, and DAX.
 
 ### Why Adjacent Formula Columns Instead of Calculated Fields?
-Excel Calculated Fields in pivot tables operate on row-level data before aggregation, not on the aggregated values. This produces incorrect results for percentage subtraction (e.g., Delta vs Benchmark). Adjacent cell formula columns referencing the already-aggregated pivot values are always correct. This is a common error in portfolio projects — documenting the correct approach demonstrates deeper analytical maturity.
-
+Excel Calculated Fields in pivot tables operate on row-level data before aggregation, not on the aggregated values. This produces incorrect results for percentage subtraction (e.g., Delta vs Benchmark). Adjacent cell formula columns referencing the already-aggregated pivot values are always correct.
 ### Why SUMX for Cost Calculations?
 `SUMX(FILTER(...), MonthlyIncome * 12)` calculates each individual leaver's annual salary before summing. The alternative `COUNT × AVG × 12` introduces rounding errors when the average produces a non-integer value — small per employee but meaningful at scale across 237 leavers. Individual-level iteration via SUMX mirrors the SQL `SUM(monthlyincome) * 12` approach used in Q17 and Q18.
 
