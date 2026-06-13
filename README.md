@@ -414,43 +414,6 @@ Employees with no stock options leave at 24.4% versus 9.4% for Low option holder
 
 ## Repository Structure
 
-P2_HR_Attrition/
-│
-├── 1_Data/
-│   ├── Raw/
-│   │   └── WA_Fn-UseC_-HR-Employee-Attrition.csv
-│   └── Cleaned/
-│       ├── HR_Attrition_Cleaned.xlsx
-│       └── HR_Attrition_Cleaned.csv
-│
-├── 2_Excel_Analysis/
-│   └── HR_Attrition_Cleaned.xlsx
-│
-├── 3_SQL/
-│   ├── Queries/
-│   │   └── HR_Attrition_SQL_Analysis.sql
-│   └── Query_Results/
-│       ├── Q01_Overall_Attrition_Rate.csv
-│       ├── Q02_Attrition_By_Department.csv
-│       └── ... (all 20 CSV files)
-│
-├── 4_PowerBI/
-│   └── Hr_Attrition.pbix
-│
-├── 5_Screenshots/
-│   ├── DC_Data_Cleaning/
-│   │   └── DC_01 through DC_10
-│   ├── Excel_Analysis/
-│   │   └── Excel_PT1 through Excel_PT5 (7 files with subdivisions)
-│   ├── SQL_Queries/
-│   │   └── SQL_Q01 through SQL_Q20 (22 files with subdivisions)
-│   └── PBI_Dashboard/
-│       └── PBI_P1 through PBI_P5
-│
-└── 6_GitHub_Docs/
-    └── Documentation/
-
-
 HR-Attrition-Workforce-Analytics/
 │
 ├── 1_Data/
